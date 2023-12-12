@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:singleclinic/scoped_models/userscopedmodel.dart';
+import 'package:singleclinic/utils/colors.dart';
 import 'package:singleclinic/utils/constants.dart';
 
 // import 'package:http/http.dart' as http;
@@ -16,7 +17,9 @@ class UpdateProfilePage extends StatefulWidget {
   @override
   _UpdateProfilePageState createState() => _UpdateProfilePageState();
   bool isFromHome;
-  UpdateProfilePage({Key key, this.isFromHome}) : super(key: key);
+  bool isFromHomeScreen;
+  UpdateProfilePage({Key key, this.isFromHome, this.isFromHomeScreen})
+      : super(key: key);
 }
 
 class _UpdateProfilePageState extends State<UpdateProfilePage> {
@@ -63,18 +66,20 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
       appBar: AppBar(
         title: Text("Update Profile"),
         elevation: 0,
-        backgroundColor: Color(0xff00BE9C),
+        backgroundColor: primaryColor,
         // backgroundColor: Color.fromARGB(255, 26, 246, 154),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-            // _scaffoldKey.currentState.openDrawer();
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            size: 20,
-          ),
-        ),
+        leading: widget.isFromHomeScreen
+            ? null
+            : IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // _scaffoldKey.currentState.openDrawer();
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  size: 20,
+                ),
+              ),
       ),
       // drawer: DrawerWidget(),
       body: ScopedModel<UserModel>(

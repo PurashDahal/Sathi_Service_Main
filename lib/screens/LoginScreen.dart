@@ -70,7 +70,10 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 50,
               ),
-              Image.asset("assets/logo.png"),
+              Image.asset(
+                "assets/homescreen/logo.png",
+                color: Colors.teal,
+              ),
               SizedBox(
                 height: 130,
               ),

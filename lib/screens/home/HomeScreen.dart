@@ -28,7 +28,9 @@ import 'package:singleclinic/utils/extensions/padding.dart';
 import 'package:singleclinic/wishlist_screen.dart';
 
 import '../../modals/jobsList.dart';
+import '../ServicesVerticallist.dart';
 import '../web_view.dart';
+import 'components/category_service.dart';
 import 'components/doctors_horizontal_component.dart';
 import 'components/hospitals_horizontal_list.dart';
 import 'components/medicine_horizontal_list.dart';
@@ -370,13 +372,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             SearchArea(),
             // SliderImage(),
+            SizedBox(
+              height: 20,
+            ),
+
             OurDepartments(),
+            // CategoryServices(),
 
             /*Book appointment at hospital*/
             // HospitalsComp(),
 
             /*Meet doctors*/
             JobsHorizontalList(),
+            // ServicesVerticalList(),
 
             // SubscriptionHorizontalList(),
 

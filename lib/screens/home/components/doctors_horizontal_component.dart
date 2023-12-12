@@ -5,6 +5,8 @@ import 'package:singleclinic/common/widgets/heading_tile.dart';
 import 'package:singleclinic/common/widgets/horizontal_shimmer_list.dart';
 import 'package:singleclinic/scoped_models/doctors_model.dart';
 import 'package:singleclinic/screens/appointment/appointment_booking_screen.dart';
+import 'package:singleclinic/screens/doctors/doctors_list_screen.dart';
+import 'package:singleclinic/screens/doctors/widget/doctor_item_widget_vertical.dart';
 import 'package:singleclinic/screens/shop/widgets/JobDescription.dart';
 import 'package:singleclinic/utils/colors.dart';
 import 'package:singleclinic/utils/extensions/padding.dart';
@@ -23,6 +25,7 @@ class JobsHorizontalList extends StatelessWidget {
         print("Building Horizontal");
         JobsScopedModel.of(context)
             .getHomePageJobs(individual, isRefresh: true);
+
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -48,21 +51,29 @@ class JobsHorizontalList extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (c) => JobDesciptoion(
-                                            job: e,
-                                            title: "Software engineer",
-                                            designation: "Junior",
-                                            experience: "2 years",
-                                            requiremets: 3,
-                                            Salary: 25000,
-                                            // postedDate: "2023/07/23",
-                                            // expiryDate: "2023/08/23",
-                                            duration: "Full Time",
-                                            text:
-                                                '''Are you interested in having your products be used by 1000s of brands globally? Does building a global brand excite you? Does having your solutions be used by the world’s top brand get you up from bed? GrowByData is on a mission to expand its distribution to the world’s retailers and is seeking energetic, creative, and self-driven individuals to join the challenge. We are looking for a motivated, and talented individual to join us as Software Engineer to deliver our enterprise platform! ''',
-                                            location: "Biratnagar",
-                                          ),
-                                        ));
+                                            builder: (c) =>
+                                                // JobsListScreen()
+                                                //     JobDesciptoion(
+                                                //   job: e,
+                                                //   title: "Software engineer",
+                                                //   designation: "Junior",
+                                                //   experience: "2 years",
+                                                //   requiremets: 3,
+                                                //   Salary: 25000,
+                                                //   // postedDate: "2023/07/23",
+                                                //   // expiryDate: "2023/08/23",
+                                                //   duration: "Full Time",
+                                                //   text:
+                                                //       '''Are you interested in having your products be used by 1000s of brands globally? Does building a global brand excite you? Does having your solutions be used by the world’s top brand get you up from bed? GrowByData is on a mission to expand its distribution to the world’s retailers and is seeking energetic, creative, and self-driven individuals to join the challenge. We are looking for a motivated, and talented individual to join us as Software Engineer to deliver our enterprise platform! ''',
+                                                //   location: "Biratnagar",
+                                                // ),
+                                                // DoctorAppointmentScreen(
+                                                //   back: true,
+                                                //   doctor: e,
+                                                // )
+                                                ServiceDetailScreen(
+                                                  doctor: e,
+                                                )));
                                   },
                                   child: Container(
                                       // width: double.infinity,

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nepal.mhealth">
+    package="com.sathi.service">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -12,8 +12,8 @@
 
     <application
         tools:replace="android:label"
-        android:label="Questal"
-        android:icon="@mipmap/app_icon">
+        android:label="Sathi Service"
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
             android:launchMode="singleTop"
@@ -65,7 +65,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="com.nepal.mhealth.braintree" />
+                <data android:scheme="com.sathi.service.braintree" />
             </intent-filter>
         </activity>
 

@@ -261,12 +261,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     response = await dio.post(
       SERVER_ADDRESS + "/api/register",
       data: {
-        "name":"$name",
-        "email":"$emailAddress",
-        "password":"$password",
+        "name": "$name",
+        "email": "$emailAddress",
+        "password": "$password",
         "phone": "$phoneNumber"
-
-
       },
       options: Options(
           headers: {
@@ -334,9 +332,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       print("Here $password");
       print("Here $phoneNumber");
 
-
-
-
       print("Here ${response.toString()}");
       Navigator.pop(context);
       showDialog(
@@ -357,7 +352,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   )
-                : response.toString().length > 100
+                : response.toString().length < 8
                     ? AlertDialog(
                         // title: Text('Title'),
                         content: Text('Password is too short'),

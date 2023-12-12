@@ -9,8 +9,10 @@ import 'package:singleclinic/scoped_models/doctors_model.dart';
 import 'package:singleclinic/screens/appointment/appointment_booking_screen.dart';
 import 'package:singleclinic/screens/doctors/widget/doctor_item_widget_vertical.dart';
 import 'package:singleclinic/utils/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../common/widgets/drawer.dart';
+import '../pleaseLogin.dart';
 
 class JobsListScreen extends StatefulWidget {
   static const routeName = "JobsListScreen";
@@ -29,6 +31,12 @@ class _JobsListScreenState extends State<JobsListScreen> {
   List<Doctor> searchedJobs;
   String _selectedValue;
   final Map<String, String> individual = {"individual": "yes"};
+  String token;
+
+  shredPre() async {
+    var pref = await SharedPreferences.getInstance();
+    token = pref.getString("token");
+  }
 
   // ourDepartment() async {
   //   if (widget.filtersMap != null) {
@@ -80,7 +88,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
         backgroundColor: Color(0xfff6f6f6),
         appBar: AppBar(
           title: Text(
-            "Jobs",
+            "Services",
             style: GoogleFonts.poppins().copyWith(color: Colors.black),
           ),
           elevation: 0,
@@ -127,16 +135,35 @@ class _JobsListScreenState extends State<JobsListScreen> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) =>
                                       DoctorItemVertical(
+                                    isInBooking: false,
                                     doctor: searchedJobs[index],
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (c) =>
-                                                  DoctorAppointmentScreen(
-                                                    doctor: searchedJobs[index],
-                                                    back: true,
-                                                  )));
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (c) =>
+                                      //             DoctorAppointmentScreen(
+                                      //               doctor: searchedJobs[index],
+                                      //               back: true,
+                                      //             )));
+                                      if (token != null) {
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (c) =>
+                                        //             DoctorAppointmentScreen(
+                                        //               doctor:
+                                        //                   searchedJobs[index],
+                                        //               back: true,
+                                        //             )));
+                                      } else {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (c) => PleaseLogin(
+                                                      Feature: 'Services',
+                                                    )));
+                                      }
                                     },
                                   ),
                                   itemCount: searchedJobs.length,
@@ -163,19 +190,38 @@ class _JobsListScreenState extends State<JobsListScreen> {
                                       print(
                                           "Length ${model.doctorsList.length}");
                                       return DoctorItemVertical(
+                                        isInBooking: false,
                                         doctor: model.doctorsList[index],
                                         onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (c) =>
-                                                  DoctorAppointmentScreen(
-                                                doctor:
-                                                    model.doctorsList[index],
-                                                back: true,
-                                              ),
-                                            ),
-                                          );
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (c) =>
+                                          //         DoctorAppointmentScreen(
+                                          //       doctor:
+                                          //           model.doctorsList[index],
+                                          //       back: true,
+                                          //     ),
+                                          //   ),
+                                          // );
+                                          if (token != null) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (c) =>
+                                                        DoctorAppointmentScreen(
+                                                          doctor: searchedJobs[
+                                                              index],
+                                                          back: true,
+                                                        )));
+                                          } else {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (c) => PleaseLogin(
+                                                          Feature: 'Services',
+                                                        )));
+                                          }
                                         },
                                       );
                                     }),
@@ -282,6 +328,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) =>
                                       DoctorItemVertical(
+                                    isInBooking: false,
                                     doctor: searchedJobs[index],
                                     onTap: () {
                                       Navigator.push(
@@ -318,6 +365,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
                                       print(
                                           "Length ${model.doctorsList.length}");
                                       return DoctorItemVertical(
+                                        isInBooking: false,
                                         doctor: model.doctorsList[index],
                                         onTap: () {
                                           Navigator.push(
@@ -395,7 +443,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Select a department"),
+              Text("Select a category"),
               ScopedModel<DepartmentScopedModel>(
                   model: DepartmentScopedModel.instance,
                   child: Builder(builder: (context) {

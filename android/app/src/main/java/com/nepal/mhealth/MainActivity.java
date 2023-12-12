@@ -1,4 +1,4 @@
-package com.nepal.mhealth;
+package com.sathi.service;
 
 import io.flutter.embedding.android.FlutterActivity;
 

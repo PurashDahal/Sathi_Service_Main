@@ -63,7 +63,7 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
         backgroundColor: Color(0xfff6f6f6),
         appBar: AppBar(
           title: Text(
-            "Book Appointment",
+            "Apply Service",
             style: GoogleFonts.poppins().copyWith(color: Colors.black),
           ),
           elevation: 0,
@@ -84,7 +84,7 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
               } else {
                 if (token == null) {
                   final snackBar = SnackBar(
-                    content: Text('Login To Book Appointment'),
+                    content: Text('Login To Book Service'),
                     backgroundColor: Colors.teal,
                     behavior: SnackBarBehavior.floating,
                     action: SnackBarAction(
@@ -180,6 +180,7 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                     },
                   ),
                   DoctorItemVertical(
+                    isInBooking: true,
                     doctor: widget.doctor,
                     // onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c)=>DoctorDetails(doctor.id)))
                   ),
@@ -412,35 +413,35 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                     //   );
                     // }
                   }),
-                  ScopedModelDescendant<AppointmentModel>(
-                      builder: (context, _, model) {
-                    return Container(
-                      margin: EdgeInsets.all(8),
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: DropdownButton(
-                          onChanged: (value) {
-                            model.selectedPatient = model.patientsList
-                                .firstWhere((element) => element.id == value);
-                            model.notifyListeners();
-                          },
-                          value: model.selectedPatient != null
-                              ? model.selectedPatient.id
-                              : null,
-                          isExpanded: true,
-                          underline: SizedBox(),
-                          hint: Text("Select Patient Name"),
-                          items: model.patientsList
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(e.firstName),
-                                    value: e.id,
-                                  ))
-                              .toList()),
-                    );
-                  })
+                  // ScopedModelDescendant<AppointmentModel>(
+                  //     builder: (context, _, model) {
+                  //   return Container(
+                  //     margin: EdgeInsets.all(8),
+                  //     padding: EdgeInsets.all(8),
+                  //     width: double.infinity,
+                  //     decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(8)),
+                  //     child: DropdownButton(
+                  //         onChanged: (value) {
+                  //           model.selectedPatient = model.patientsList
+                  //               .firstWhere((element) => element.id == value);
+                  //           model.notifyListeners();
+                  //         },
+                  //         value: model.selectedPatient != null
+                  //             ? model.selectedPatient.id
+                  //             : null,
+                  //         isExpanded: true,
+                  //         underline: SizedBox(),
+                  //         hint: Text("Select Patient Name"),
+                  //         items: model.patientsList
+                  //             .map((e) => DropdownMenuItem(
+                  //                   child: Text(e.firstName),
+                  //                   value: e.id,
+                  //                 ))
+                  //             .toList()),
+                  //   );
+                  // })
                 ],
               ),
               ScopedModelDescendant<AppointmentModel>(
@@ -449,32 +450,40 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    ElevatedButton(
-                      onPressed: () {
-                        if (token == null) {
-                          final snackBar = SnackBar(
-                            content: Text('Login To Add Patient'),
-                            backgroundColor: Colors.teal,
-                            behavior: SnackBarBehavior.floating,
-                            action: SnackBarAction(
-                              label: 'Login',
-                              disabledTextColor: Colors.white,
-                              textColor: Colors.yellow,
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (con) => LoginScreen()));
-                                //Do whatever you want
-                              },
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        } else {
-                          showNewPatientDialog(model: model);
-                        }
-                      },
-                      child: const Text('Add new patient'),
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      // child: Container(
+                      //   width: double.infinity,
+                      //   height: 50,
+                      //   child: ElevatedButton(
+                      //     onPressed: () {
+                      //       if (token == null) {
+                      //         final snackBar = SnackBar(
+                      //           content: Text('Login To Add Patient'),
+                      //           backgroundColor: Colors.teal,
+                      //           behavior: SnackBarBehavior.floating,
+                      //           action: SnackBarAction(
+                      //             label: 'Login',
+                      //             disabledTextColor: Colors.white,
+                      //             textColor: Colors.yellow,
+                      //             onPressed: () {
+                      //               Navigator.push(
+                      //                   context,
+                      //                   MaterialPageRoute(
+                      //                       builder: (con) => LoginScreen()));
+                      //               //Do whatever you want
+                      //             },
+                      //           ),
+                      //         );
+                      //         ScaffoldMessenger.of(context)
+                      //             .showSnackBar(snackBar);
+                      //       } else {
+                      //         showNewPatientDialog(model: model);
+                      //       }
+                      //     },
+                      //     child: const Text('Apply'),
+                      //   ),
+                      // ),
                     ),
                   ],
                 );

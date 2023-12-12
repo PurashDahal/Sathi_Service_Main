@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:singleclinic/modals/Doctor_model.dart';
 import 'package:singleclinic/services/api_service.dart';
 import 'package:singleclinic/utils/AppExceptions.dart';
+
+import '../modals/department_model.dart';
 
 class JobsScopedModel extends Model {
   static JobsScopedModel of(BuildContext context) =>
@@ -22,9 +26,18 @@ class JobsScopedModel extends Model {
   List<Doctor> doctorsList = [];
   List<Doctor> homePageDoctorList = [];
 
+  List<Department> departmentsList = [];
+
+  getDepartments() async {
+    log('Geting departments');
+    departmentsList = await _service.getDepartments();
+
+    notifyListeners();
+  }
+
   getJobs(var data, {bool isRefresh = false}) async {
-    print("Getting doctors");
-    if (isRefresh) {
+    log("Getting doctors");
+    if (isRefresh == false) {
       print("Refreshing list");
       _currentPage = 1;
       doctorsList.clear();

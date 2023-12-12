@@ -90,35 +90,41 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          width: 65,
-                          height: 65,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(100),
-                              image: DecorationImage(
-                                  image: token != null
-                                      ? NetworkImage(
-                                          "https://service.sansarhealth.com/public/upload/profile/$imageUrl")
-                                      : AssetImage('assets/sansarhealth.jpg'),
-                                  fit: BoxFit.cover)),
+                        // Container(
+                        //   width: 65,
+                        //   height: 65,
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.white,
+                        //       borderRadius: BorderRadius.circular(100),
+                        //       image: DecorationImage(
+                        //           image: token != null
+                        //               ? NetworkImage(
+                        //                   "https://service.sansarhealth.com/public/upload/profile/$imageUrl")
+                        //               : AssetImage(
+                        //                   'assets/Sathi.png',
+                        //                 ),
+                        //           fit: BoxFit.cover)),
 
-                          // child: Center(
-                          //     child: token != null
-                          //         ? Image.network(
-                          //               "https://service.sansarhealth.com/public/upload/profile/$imageUrl")
-                          //         : Container(
-                          //             width: 42,
-                          //             height: 42,
-                          //             child: Image(
-                          // image: AssetImage(
-                          //     'assets/sansarhealth.jpg'),
-                          //               fit: BoxFit.fill,
-                          //             ),
-                          //             decoration: BoxDecoration(
-                          //                 color: Colors.white,
-                          //                 borderRadius:
-                          //                     BorderRadius.circular(100)))),
+                        //   // child: Center(
+                        //   //     child: token != null
+                        //   //         ? Image.network(
+                        //   //               "https://service.sansarhealth.com/public/upload/profile/$imageUrl")
+                        //   //         : Container(
+                        //   //             width: 42,
+                        //   //             height: 42,
+                        //   //             child: Image(
+                        //   // image: AssetImage(
+                        //   //     'assets/sansarhealth.jpg'),
+                        //   //               fit: BoxFit.fill,
+                        //   //             ),
+                        //   //             decoration: BoxDecoration(
+                        //   //                 color: Colors.white,
+                        //   //                 borderRadius:
+                        //   //                     BorderRadius.circular(100)))),
+                        // ),
+                        Image.asset(
+                          "assets/Sathi.png",
+                          width: 70,
                         ),
                         SizedBox(width: 10),
                         Column(

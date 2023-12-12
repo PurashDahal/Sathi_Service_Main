@@ -80,7 +80,7 @@ class _ShopScreenState extends State<ShopScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Questal",
+                Text("",
                     style: TextStyle(
                         color: Color(0xff9EA7B1),
                         fontWeight: FontWeight.bold,

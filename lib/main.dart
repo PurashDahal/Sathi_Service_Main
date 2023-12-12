@@ -9,15 +9,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:singleclinic/profile/profile.dart';
 import 'package:singleclinic/screens/SubscriptionPlansScreen.dart';
 import 'package:singleclinic/screens/doctors/doctors_list_screen.dart';
 import 'package:singleclinic/screens/home/HomeScreen.dart';
 import 'package:singleclinic/screens/SplashScreen.dart';
 import 'package:singleclinic/screens/hospital/hospital_list_screen.dart';
+import 'package:singleclinic/screens/pleaseLogin.dart';
 import 'package:singleclinic/screens/shop/CandidateScreen.dart';
 import 'package:singleclinic/screens/shop/shop_screen.dart';
+import 'package:singleclinic/screens/shop/widgets/AccountScreen.dart';
 import 'package:singleclinic/utils/colors.dart';
 import 'package:singleclinic/utils/routes/routes.dart';
+import 'package:singleclinic/wishlist_screen.dart';
 
 import 'notificationTesting/notificationHelper.dart';
 
@@ -94,11 +98,12 @@ void main() async {
             fontFamily: "Avir",
           ),
         ),
-        primaryColor: NAVY_BLUE,
+        primaryColor: primaryColor,
         colorScheme: ColorScheme.fromSwatch()
-            .copyWith(secondary: LIME, primary: NAVY_BLUE)),
+            .copyWith(secondary: primaryColor, primary: primaryColor)),
     routes: Routes.routes,
-    initialRoute: SplashScreen.routeName,
+    // initialRoute: SplashScreen.routeName,
+    initialRoute: RootScreen.routeName,
     localizationsDelegates: [
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
@@ -121,19 +126,34 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> with TickerProviderStateMixin {
   int currentTab = 0;
+  String token;
+
+  shredPre() async {
+    var pref = await SharedPreferences.getInstance();
+    token = pref.getString("token");
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background1,
+      backgroundColor: LIGHT_GREY_SCREEN_BG,
       body: Stack(
         children: [
           currentTab == 0 ? HomeScreen() : Container(),
-          currentTab > 0 ? CandidateScreen() : Container(),
-          currentTab > 1 ? JobsListScreen() : Container(),
-          currentTab > 2 ? HospitalListScreen() : Container(),
-          currentTab > 3 ? SubscriptionPlansScreen() : Container(),
-          currentTab > 4 ? ShopScreen() : Container(),
+          // currentTab > 0 ? CandidateScreen() : Container(),
+          currentTab == 1 ? JobsListScreen() : Container(),
+          currentTab == 2 ? ShopScreen() : Container(),
+
+          // currentTab > 2 ? HospitalListScreen() : Container(),
+          currentTab == 3
+              ? token == null
+                  ?
+                  // WishlistScreen()
+                  UpdateProfilePage(
+                      isFromHomeScreen: true,
+                    )
+                  : PleaseLogin(Feature: "Account")
+              : Container(),
         ],
       ),
       bottomNavigationBar: ClipRRect(
@@ -158,44 +178,48 @@ class _RootScreenState extends State<RootScreen> with TickerProviderStateMixin {
                 ),
                 label: "Home",
               ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(
+              //     currentTab == 1 ? Icons.person : Icons.person,
+              //     color: currentTab == 1 ? WHITE : WHITE,
+              //   ),
+              //   label: "Candidates",
+              // ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  currentTab == 1 ? Icons.person : Icons.person,
-                  color: currentTab == 1 ? WHITE : WHITE,
-                ),
-                label: "Candidates",
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(
+                  icon: Image.asset(
                     currentTab == 2
-                        ? CupertinoIcons.briefcase
-                        : CupertinoIcons.briefcase,
+                        ? "assets/service.png"
+                        : "assets/service.png",
+                    height: 25,
+                    width: 25,
                     color: currentTab == 2 ? WHITE : WHITE,
                   ),
                   label: "Services"),
               BottomNavigationBarItem(
                   icon: Icon(
-                    currentTab == 3 ? Icons.business : Icons.business,
+                    currentTab == 3
+                        ? Icons.shopping_bag_outlined
+                        : Icons.shopping_bag_outlined,
                     color: currentTab == 3 ? WHITE : WHITE,
                   ),
-                  label: "Companies"),
+                  label: "Shop"),
               BottomNavigationBarItem(
                 icon: Icon(
-                  currentTab == 4 ? Icons.newspaper : Icons.newspaper,
+                  currentTab == 4 ? Icons.person : Icons.person,
                   color: currentTab == 4 ? WHITE : WHITE,
                 ),
-                label: "Packages",
+                label: "My Account",
               ),
-              BottomNavigationBarItem(
-                  icon: Image.asset(
-                    currentTab == 5
-                        ? "assets/shop_icon.png"
-                        : "assets/shop_icon.png",
-                    color: currentTab == 5 ? WHITE : WHITE,
-                    height: 23,
-                    width: 23,
-                  ),
-                  label: "Shop"),
+              // BottomNavigationBarItem(
+              //     icon: Image.asset(
+              //       currentTab == 5
+              //           ? "assets/shop_icon.png"
+              //           : "assets/shop_icon.png",
+              //       color: currentTab == 5 ? WHITE : WHITE,
+              //       height: 23,
+              //       width: 23,
+              //     ),
+              //     label: "Shop"),
             ],
             type: BottomNavigationBarType.fixed,
             selectedFontSize: 10,

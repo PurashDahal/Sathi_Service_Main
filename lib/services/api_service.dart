@@ -273,10 +273,12 @@ class ApiService {
     http.Response response =
         await http.get(Uri.parse(USER_DETAILS), headers: headers);
     if (response.statusCode == 200) {
+      print(token);
       var json = jsonDecode(response.body)["data"];
       return UserDetail.fromJson(json);
     } else {
       print("dasda ${response.statusCode}");
+      print(token);
     }
     // throw Exception("Error");
   }

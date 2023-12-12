@@ -247,6 +247,7 @@ class _DepartmentScreenState extends State<DepartmentScreen> {
         setState(() {
           departmentsClass = DepartmentsClass.fromJson(jsonResponse);
           list.addAll(departmentsClass.data.data);
+
           isLoadingMore = false;
           nextUrl = departmentsClass.data.nextPageUrl;
         });

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:singleclinic/screens/LoginScreen.dart';
+import 'package:singleclinic/utils/colors.dart';
 
 class PleaseLogin extends StatefulWidget {
   String Feature;
@@ -24,7 +25,7 @@ class _PleaseLoginState extends State<PleaseLogin> {
     token = pref.getString("token");
     final snackBar = SnackBar(
       content: Text('Login To Use This ${widget.Feature} Feature'),
-      backgroundColor: Colors.teal,
+      backgroundColor: primaryColor,
       behavior: SnackBarBehavior.floating,
       action: SnackBarAction(
         label: 'Login',
@@ -52,16 +53,18 @@ class _PleaseLoginState extends State<PleaseLogin> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xff00BE9C),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            size: 35,
-          ),
-        ),
+        backgroundColor: primaryColor,
+        leading: widget.Feature.contains("Account")
+            ? null
+            : IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: 35,
+                ),
+              ),
         title: Text('Login To Use ${widget.Feature} Feature'),
       ),
       body: Container(
